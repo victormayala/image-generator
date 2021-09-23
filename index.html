@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Image Generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script>
+
+      // Run the code as soon as the window loads
+      window.onload = function () {
+        // Add section of code for each body part to generate a random image file name
+
+        // BODY
+        var body = new Image();
+        var bodynum = Math.floor(Math.random() * 3) + 1;
+        var bodyname = "body" + bodynum + ".png";
+        body.src = bodyname;
+
+        // BOTTOM
+        var bottom = new Image();
+        var bottomnum = Math.floor(Math.random() * 3) + 1;
+        var bottomname = "bottom" + bottomnum + ".png";
+        bottom.src = bottomname;
+
+        // EYES
+        var eyes = new Image();
+        var eyesnum = Math.floor(Math.random() * 3) + 1;
+        var eyesname = "eyes" + eyesnum + ".png";
+        eyes.src = eyesname;
+
+        // Wait until body part is loaded and then call the function that displays all images
+
+        // BODY
+        body.onload = function () {
+          buildrobot();
+        }
+
+        // BOTTOM
+        bottom.onload = function () {
+          buildrobot();
+        }
+
+        // EYES
+        eyes.onload = function () {
+          buildrobot();
+        }
+
+        // This is the function that displays all images
+        function buildrobot() {
+          var canvas = document.getElementById('canvas');
+          var ctx = canvas.getContext('2d');
+          canvas.width = 500;
+          canvas.height = 500;
+
+          // ADD RANDOM BACKGROUND COLOR
+          var r = Math.floor(Math.random() * (255 - 100 + 1) + 100);
+          var g = Math.floor(Math.random() * (255 - 100 + 1) + 100);
+          var b = Math.floor(Math.random() * (255 - 100 + 1) + 100);
+          var bgcol = "#" + r.toString(16) + g.toString(16) + b.toString(16);
+          ctx.fillStyle = bgcol;
+          ctx.fillRect(0, 0, 500, 500);
+
+          // This is the list of all parts and where they should go (centered, and height)
+
+          // BODY
+          ctx.drawImage(body, ((500 - body.width) / 2), 2);
+          // BOTTOM
+          ctx.drawImage(bottom, ((500 - bottom.width) / 2), 2);
+          // EYES
+          ctx.drawImage(eyes, ((500 - eyes.width) / 2), 2);
+        }
+
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div>
+            <canvas id="canvas" style="border:5px solid #ccc;"></canvas>
+          </div>
+          <!-- button -->
+          <button style="font-size : 50px; width: 25%; height: 100px;" onClick="window.location.reload();">Generate!</button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
